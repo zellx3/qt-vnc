@@ -1,0 +1,15 @@
+{
+  "name": "Qt6 QML (VNC desktop)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "VNC Desktop",
+      "visibility": "public"
+    }
+  },
+  "postCreateCommand": "cmake --preset default",
+  "postStartCommand": "bash .devcontainer/start-vnc.sh"
+}
