@@ -13,9 +13,12 @@ qt_add_executable(qt_vnc_app
     src/main.cpp
 )
 
+set_source_files_properties(src/qml/Main.qml PROPERTIES QT_RESOURCE_ALIAS Main.qml)
+
 qt_add_qml_module(qt_vnc_app
     URI QtVncApp
     VERSION 1.0
+    RESOURCE_PREFIX /qt/qml
     QML_FILES
         src/qml/Main.qml
 )
