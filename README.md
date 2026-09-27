@@ -7,7 +7,14 @@ its window viewable in a browser over VNC.
 
 Click **Code → Codespaces → Create codespace on main**. The devcontainer
 builds an Ubuntu 24.04 image with Qt6, build tools, and a virtual X11 desktop
-(Xvfb + fluxbox + x11vnc + noVNC), then starts that desktop automatically.
+(Xvfb + fluxbox + x11vnc + noVNC), builds the app, and starts the desktop
+with the app already running.
+
+Open the app's window from your local machine: in the Codespace's **Ports**
+tab, find port `6080` ("VNC Desktop") and open it in a browser. That's a
+noVNC client connected to the container's virtual desktop — the running app
+window appears there automatically and is fully interactive (click, type,
+resize).
 
 ## Build
 
@@ -18,19 +25,17 @@ cmake --build --preset default
 
 The binary is produced at `build/qt_vnc_app`.
 
-## Run the GUI
+## Run the GUI manually
 
-The container runs a virtual display on `:1`, exposed over noVNC. Any new
-terminal already has `DISPLAY=:1` exported; if not:
+`.devcontainer/start-vnc.sh` already builds and launches the app on every
+Codespace start/resume (it's idempotent, so re-running it is safe and won't
+spawn duplicates). To run it yourself instead — e.g. after rebuilding — the
+container has a virtual display on `:1`, and any new terminal already has
+`DISPLAY=:1` exported; if not:
 
 ```bash
 DISPLAY=:1 ./build/qt_vnc_app
 ```
-
-Open the app's window from your local machine: in the Codespace's **Ports**
-tab, find port `6080` ("VNC Desktop") and open it in a browser. That's a
-noVNC client connected to the container's virtual desktop — the running app
-window appears there and is fully interactive (click, type, resize).
 
 ## Troubleshooting
 

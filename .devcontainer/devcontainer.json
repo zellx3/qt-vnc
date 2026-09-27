@@ -10,6 +10,6 @@
       "visibility": "public"
     }
   },
-  "postCreateCommand": "cmake --preset default",
+  "postCreateCommand": "cmake --preset default && cmake --build --preset default",
   "postStartCommand": "bash .devcontainer/start-vnc.sh"
 }
