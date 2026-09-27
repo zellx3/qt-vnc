@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QUrl>
 
 int main(int argc, char *argv[])
 {
@@ -10,7 +11,7 @@ int main(int argc, char *argv[])
         &engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, [] { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("QtVncApp", "Main");
+    engine.load(QUrl(QStringLiteral("qrc:/qt/qml/QtVncApp/Main.qml")));
 
     return app.exec();
 }
